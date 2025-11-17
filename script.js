@@ -126,3 +126,29 @@ document.getElementById("email").addEventListener("input", function () {
         console.log("Очищено login:", cleaned);
     }
 });
+
+document.getElementById("checkBtn").addEventListener("click", () => {
+    let text1 = document.getElementById("input1").value.toLowerCase();
+    let text2 = document.getElementById("input2").value.toLowerCase();
+
+    
+    text1 = text1.replace(/[.,!?]/g, "");
+    text2 = text2.replace(/[.,!?]/g, "");
+
+  
+    let arr1 = text1.split(" ");
+    let arr2 = text2.split(" ");
+
+  
+    let set1 = new Set(arr1);
+    let set2 = new Set(arr2);
+
+    
+    let common = [...set1].filter(word => set2.has(word));
+
+   
+    document.getElementById("result").textContent = 
+        common.length > 0 
+        ? "Спільні слова: " + common.join(", ") 
+        : "Спільних слів немає";
+});
