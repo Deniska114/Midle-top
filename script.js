@@ -79,3 +79,50 @@ function addDynamicImages() {
         }, index * 1000);
     });
 }
+
+document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault(); // не відправляємо форму
+
+    let emailLogin = document.getElementById("email").value;
+
+  
+    const loginRegex = /^[a-zA-Z0-9_]{3,16}$/;   
+    const emailRegex = /^[\w.-]+@[\w.-]+\.\w{2,}$/;
+    const phoneRegex = /^\+380\d{9}$/;
+
+    console.log("Перевіряємо:", emailLogin);
+
+    
+    if (emailLogin.match(loginRegex)) {
+        alert("Ви ввели ЛОГІН ");
+        return;
+    }
+
+   
+    if (emailLogin.search(emailRegex) !== -1) {
+        alert("Ви ввели EMAIL ");
+        return;
+    }
+
+    
+    if (emailLogin.match(phoneRegex)) {
+        alert("Ви ввели НОМЕР ТЕЛЕФОНУ ");
+        return;
+    }
+
+    alert(" Невірний формат. Введіть login / email / телефон.");
+});
+
+
+
+document.getElementById("email").addEventListener("input", function () {
+    let text = this.value;
+
+    
+    let cleaned = text.replace(/[^\w]/g, "");
+
+    if (cleaned !== text) {
+        this.value = cleaned;
+        console.log("Очищено login:", cleaned);
+    }
+});
