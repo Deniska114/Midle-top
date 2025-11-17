@@ -33,3 +33,49 @@ if (h1) {
 } else {
   console.log("На сторінці немає <h1>");
 }
+
+
+setTimeout(() => {
+    addDynamicImages();
+}, 5000);
+
+function addDynamicImages() {
+
+    
+    let imagesUrl = [
+        "https://via.placeholder.com/200x200/ff0000",
+        "https://via.placeholder.com/200x200/00ff00",
+        "https://via.placeholder.com/200x200/0000ff",
+        "https://via.placeholder.com/200x200/f0f000"
+    ];
+
+    
+    const parent = document.querySelector(".products");
+
+   
+    const fragment = document.createDocumentFragment();
+
+    
+    imagesUrl.forEach((url, index) => {
+        setTimeout(() => {
+            
+            const li = document.createElement("li");
+
+           
+            const img = document.createElement("img");
+            img.src = url;
+            img.alt = "Dynamic Image";
+            img.style.width = "200px";
+
+            
+            li.appendChild(img);
+
+            
+            fragment.appendChild(li);
+
+            
+            parent.appendChild(fragment);
+
+        }, index * 1000);
+    });
+}
