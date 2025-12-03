@@ -114,6 +114,9 @@ if (form) {
 
 });
 
+login = login.replace(/^\s+|\s+$/g, '');  
+login = login.replace(/[^A-Za-z0-9_-]/g, '');
+
 
 
 
