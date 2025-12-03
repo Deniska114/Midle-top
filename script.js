@@ -87,12 +87,12 @@ if (form) {
 
         let isValid = true;
 
-        // Регулярки
+        
         const emailReg = /^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
         const loginReg = /^[A-Za-z][A-Za-z0-9_-]{3,20}$/;
         const phoneReg = /^\+380\d{9}$/;
 
-        // match() замість test()
+        
         document.getElementById("emailError").textContent =
             email.match(emailReg) ? "" : "Некоректний email!";
         isValid = isValid && email.match(emailReg);
@@ -118,5 +118,36 @@ login = login.replace(/^\s+|\s+$/g, '');
 login = login.replace(/[^A-Za-z0-9_-]/g, '');
 
 
+//спільні слова завд4:
+
+
+function comparePhrases() {
+            
+  const phrase1 = document.getElementById('phrase1').value;
+  const phrase2 = document.getElementById('phrase2').value;
+
+            
+  function getWords(phrase) {
+    return phrase
+      .toLowerCase()  
+      .replace(/[^\w\s]/g, '')  
+      .split(/\s+/);  
+    }
+
+            
+  const set1 = new Set(getWords(phrase1));
+  const set2 = new Set(getWords(phrase2));
+
+            
+  const commonWords = [...set1].filter(word => set2.has(word));
+
+            
+  if (commonWords.length > 0) {
+    document.getElementById('result').textContent = "Спільні слова: " + commonWords.join(", ");
+  } else {
+    document.getElementById('result').textContent = "Немає спільних слів.";
+  }
+}
+    
 
 
