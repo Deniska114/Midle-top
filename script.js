@@ -149,5 +149,40 @@ function comparePhrases() {
   }
 }
     
+//завдання 5 апі
+
+async function fetchArtImages() {
+    try {
+        const response = await fetch("https://api.artic.edu/api/v1/artworks?limit=3");
+        const data = await response.json();
+
+        data.data.forEach(item => {
+           
+            const imgUrl = item.image_id 
+                ? `https://www.artic.edu/iiif/2/${item.image_id}/full/200,/0/default.jpg`
+                : null;
+
+            if (imgUrl) {
+                const img = document.createElement("img");
+                img.src = imgUrl;
+                img.width = 200;
+                img.alt = item.title || "Artwork";
+                document.body.appendChild(img);
+            }
+        });
+
+    } catch (error) {
+        console.error("Помилка при зверненні до API:", error);
+        const p = document.createElement("p");
+        p.textContent = "Не вдалося завантажити картинки з API Art Institute of Chicago.";
+        document.body.appendChild(p);
+    }
+}
+
+// техника призив
+window.addEventListener("load", () => {
+    fetchArtImages();
+});
+
 
 
